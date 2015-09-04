@@ -48,7 +48,8 @@ public class SendMailController {
 		mail2.setToAddr(mail.getToAddr());
 		mail2.setSubject(mail.getSubject());
 		mail2.setContent(mail.getContent());
-		return new ResponseEntity<Mail>(mail2,status);
+		System.out.println(mail.getComment()+mail.getFromAddr()+mail.getToAddr()+mail.getSubject()+mail.getContent());
+		return new ResponseEntity <Mail>(mail2,status);
 
 		
 	}

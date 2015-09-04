@@ -7,7 +7,7 @@
         <div align="center">
             <h2>Submit Your Details Here</h2>
 
-            <form method="POST" action="checkStatus" id="ajaxform" name="ajaxform">
+            <form method="POST" id="ajaxform" name="ajaxform" >
 
                 <table>
                     <tr>
@@ -40,27 +40,40 @@
                     </tr>
                 </table>
             </form>
+           <input type= "text" id="txtname" />
 
 		<script type="text/javascript">
 		//$(document).ready(function(){
-			$("#simplepost").click(function(e)
-			{
-			var MyForm = $("#ajaxform").serialize();
-			console.log(MyForm);
+			$('#simplepost').click(function(){
+				 var data= $('#ajaxform').serializeArray();
+				 var obj={};
+				 for(var index=0;index<data.length;index++){
+					 
+					 var name = data[index].name;
+					 obj[name] = data[index].value;
+					 
+				 }
+				 var data = obj;
+				 
+				var data = JSON.stringify(data);
+			//alert(data);
 			 $.ajax(
 			 {
-			 url : "/app/checkStatus",
+			 url : "http://localhost:8080/app/checkStatus",
 			 type: "POST",
-			 data : MyForm,
+			 data : data,
+			 contentType: "application/json",
 			 dataType:"json",
+			 
 			 success:function(maindta)
 			 {
-
-			alert(maindta);
-
+				//console.data(maindta);
+				var data = maindta;
+				$('#txtname').val(data.subject);
 			 },
 			 error: function(jqXHR, textStatus, errorThrown)
 			 {
+				 var x=1;
 			 }
 			 });
 			 e.preventDefault(); //STOP default action
