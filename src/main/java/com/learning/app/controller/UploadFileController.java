@@ -1,11 +1,13 @@
 package com.learning.app.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,14 +28,22 @@ public class UploadFileController {
 
 	@RequestMapping(value = "/files", method = RequestMethod.POST)
 	public ResponseEntity<Map<String,Object>> uplaodDocs(HttpServletRequest request, @RequestParam("file") MultipartFile[] files) throws IOException{
-		
+		final Map<String, Object> response = new HashMap<String, Object>();
+		HttpStatus status = HttpStatus.OK;
 		try{
-			uploadFileService.uploadMultipleFiles(files);
+			String uploadMultipleFiles = uploadFileService.uploadMultipleFiles(files);
+			response.put("uploadMultipleFiles", uploadMultipleFiles);
+			response.put("msg", "success");
+			response.put("ok", 1);
+			
 		}catch(Exception e){
 			System.out.println(e.getMessage());
+			response.put("msg", new StringBuilder("failure"));
+			response.put("ok", 0);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		
-		return null;
+		return new ResponseEntity<Map<String, Object>>(response, status);
 		
 	}
 	

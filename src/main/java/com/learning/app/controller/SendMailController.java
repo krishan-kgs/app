@@ -1,7 +1,5 @@
 package com.learning.app.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.app.model.Mail;
-
 @RestController
 public class SendMailController {
 	String message = "Welcome to Spring MVC!";
