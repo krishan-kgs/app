@@ -27,11 +27,11 @@ public class UploadFileController {
 	private UploadFileService uploadFileService;
 
 	@RequestMapping(value = "/files", method = RequestMethod.POST)
-	public ResponseEntity<Map<String,Object>> uplaodDocs(HttpServletRequest request, @RequestParam("file") MultipartFile[] files) throws IOException{
+	public ResponseEntity<Map<String,Object>> uplaodDocs(HttpServletRequest request, @RequestParam("orderId") String orderId, @RequestParam("file") MultipartFile[] files) throws IOException{
 		final Map<String, Object> response = new HashMap<String, Object>();
 		HttpStatus status = HttpStatus.OK;
 		try{
-			String uploadMultipleFiles = uploadFileService.uploadMultipleFiles(files);
+			String uploadMultipleFiles = uploadFileService.uploadMultipleFiles(files,orderId);
 			response.put("uploadMultipleFiles", uploadMultipleFiles);
 			response.put("msg", "success");
 			response.put("ok", 1);
@@ -42,9 +42,7 @@ public class UploadFileController {
 			response.put("ok", 0);
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		
 		return new ResponseEntity<Map<String, Object>>(response, status);
-		
 	}
 	
 	@ExceptionHandler(Exception.class)

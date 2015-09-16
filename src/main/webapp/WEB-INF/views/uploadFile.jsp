@@ -9,12 +9,13 @@
 	<br />
 	<form action="/app/upload/files" method="post"
 		enctype="multipart/form-data">
-
+	OrderId
+	<input type ="text" name="orderId">
 		<div id="addMore"> 
 			<input type="file" name="file" size="50" /> 
 			
 		</div>
-		<input type="button" id="append" value="app" />
+		<input type="button" id="append" value="add" />
 		<!-- <input type="file" name="file" size="50" /> 
 		<input type="file" name="file" size="50" />
 		<input type="file" name="file" size="50" /> <br />  -->
