@@ -18,7 +18,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- <property name="maxUploadSize" value="268435456" /> -->
 	</bean>
-	
+	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer" />
+	 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
